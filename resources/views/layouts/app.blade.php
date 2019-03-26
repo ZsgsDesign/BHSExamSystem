@@ -1,18 +1,3 @@
-<?php
-    $current_hour=date("H");
-    if ($current_hour<6) {
-        $greeting="Get to bed";
-    } elseif ($current_hour<12) {
-        $greeting="Good morning";
-    } elseif ($current_hour<18) {
-        $greeting="Good afternoon";
-    } elseif ($current_hour<22) {
-        $greeting="Good evening";
-    } else {
-        $greeting="Good Night";
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -135,12 +120,13 @@
                 <div></div>
                 <div></div>
             </div>
-            <p>Preparing NOJ</p>
+            <p>考试系统准备中……</p>
         </div>
     </loading>
     <!-- Style -->
     <link rel="stylesheet" href="/static/fonts/Roboto/roboto.css">
     <link rel="stylesheet" href="/static/fonts/Montserrat/montserrat.css">
+    <link rel="stylesheet" href="/static/fonts/fzcysj/fzcysj.css">
     <link rel="stylesheet" href="/static/css/bootstrap-material-design.min.css">
     <link rel="stylesheet" href="/static/css/wemd-color-scheme.css">
     <link rel="stylesheet" href="/static/css/main.css?version={{version()}}">
@@ -152,65 +138,30 @@
         <img src="">
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom:30px;position:sticky;top:0;z-index:999;flex-shrink: 0;flex-grow: 0;">
-
-        @if(isset($custom_info) && !is_null($custom_info))
-
-            <a class="navbar-brand" href="#">
-                <img src="{{$custom_info["custom_icon"]}}" height="30"> {{$custom_info["custom_title"]}}
-            </a>
-
-        @else
-
             <a class="navbar-brand" href="/">
-                <img src="/static/img/njupt.png" height="30"> NJUPT Online Judge
+                <img src="/static/img/njupt.png" height="30"> 贝尔英才学院诚信考试系统
             </a>
-
-        @endif
-
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
             aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                @if(!Auth::check() || is_null(Auth::user()->contest_account))
-                <li class="nav-item />">
-                    <a class="nav-link @if ($navigation === "Home") active @endif" href="/">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link @if ($navigation === "Home") active @endif" href="/">考试系统</a>
                 </li>
-                @endif
-                @if(!Auth::check() || is_null(Auth::user()->contest_account))
-                    <li class="nav-item />">
-                        <a class="nav-link @if ($navigation === "Problem") active @endif" href="/problem">Problem</a>
-                    </li>
-                @endif
-                @if(!Auth::check() || is_null(Auth::user()->contest_account))
-                    <li class="nav-item />">
-                        <a class="nav-link @if ($navigation === "Status") active @endif" href="/status">Status</a>
-                    </li>
-                @endif
-                <li class="nav-item />">
-                    <a class="nav-link @if ($navigation === "Contest") active @endif" href="/contest">Contest</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://bhs.njupt.edu.cn">贝尔英才学院主页</a>
                 </li>
-                @if(!Auth::check() || is_null(Auth::user()->contest_account))
-                <li class="nav-item />">
-                    <a class="nav-link @if ($navigation === "Group") active @endif" href="/group">Group</a>
-                </li>
-                @endif
             </ul>
 
             <ul class="navbar-nav mundb-nav-right">
-                @if(!Auth::check() || is_null(Auth::user()->contest_account))
-                <form action="/search" method="get" class="form-inline my-2 my-lg-0 mundb-inline">
-                    <span class="bmd-form-group"><input class="form-control mr-sm-2 atsast-searchBox" name="q" type="search" placeholder="OnmiSearch" aria-label="search"></span>
-                </form>
-                @endif
-
                 <li class="nav-item mundb-no-shrink />">
                     @guest
-                        <a class="nav-link @if ($navigation === "Account") active @endif" href="/account">Account</a>
+                        <a class="nav-link @if ($navigation === "Account") active @endif" href="/account">登录</a>
                     @else
                         <li class="nav-item dropdown mundb-btn-ucenter">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{$greeting}}, {{ Auth::user()["name"] }}</a>
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()["name"] }}</a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-header"><img src="{{ Auth::user()->avatar }}" class="mundb-avatar" id="atsast_nav_avatar" /><div><h6>{{ Auth::user()["name"] }}<br/><small>{{ Auth::user()->email }}</small></h6></div></div>
                                 <!--
@@ -260,42 +211,7 @@
     @yield('addition')
 
     <footer class="d-print-none bg-dark center-on-small-only" style="flex-shrink: 0;flex-grow: 0">
-        <div class="mundb-footer text-light">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-md-4">
-                        <h5 class="cm-footer-title mb-4 mt-3 font-bold">NOJ</h5>
-                        <p>NOJ is an online judge developed by ICPC Team of Nanjing Universify of Posts and Telecommunications.</p>
-                    </div>
-
-                    <hr class="clearfix w-100 d-md-none">
-
-                    <div class="col-md-2 mx-auto">
-                        <h5 class="title mb-4 mt-3 font-bold">Services</h5>
-                        <p class="mb-1"><a href="/status">Judging Queue</a></p>
-                        <p class="mb-1"><a href="/system/info">System Info</a></p>
-                        <p class="mb-1"><a href="#">PasteBin</a></p>
-                    </div>
-
-                    <hr class="clearfix w-100 d-md-none">
-
-                    <div class="col-md-2 mx-auto">
-                        <h5 class="title mb-4 mt-3 font-bold">Developments</h5>
-                        <p class="mb-1"><a href="https://github.com/ZsgsDesign/NOJ">Open Source</a></p>
-                        <p class="mb-1"><a href="#">API</a></p>
-                    </div>
-
-                    <hr class="clearfix w-100 d-md-none">
-
-                    <div class="col-md-2 mx-auto">
-                        <h5 class="title mb-4 mt-3 font-bold ">Support</h5>
-                        <p class="mb-0"><i class="MDI email"></i> acm@njupt.edu.cn</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mundb-footer mundb-copyright">&copy; 2018-{{date('Y')}}, NOJ. <a href="https://github.com/ZsgsDesign/NOJ" target="_blank"><i class="MDI github-circle"></i></a></div>
+        <div class="mundb-footer mundb-copyright">&copy; 2018-{{date('Y')}}, Bell Honors School. <a href="https://github.com/ZsgsDesign/BHSExamSystem" target="_blank"><i class="MDI github-circle"></i></a></div>
     </footer>
     <script src="/static/library/jquery/dist/jquery.min.js"></script>
     <script src="/static/js/popper.min.js"></script>

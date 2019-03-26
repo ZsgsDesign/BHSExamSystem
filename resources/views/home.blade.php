@@ -21,8 +21,9 @@
         box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 40px;
     }
 
-    .cm-title-section{
-        font-family: Raleway;
+    .cm-title{
+        margin-bottom:2rem;
+        color: #3E4551;
     }
 
     .cm-oj{
@@ -33,11 +34,8 @@
         background: rgb(255, 255, 255);
     }
 
-    timeline-container{
-        display:block;
-    }
 
-    timeline-item{
+    contest-card{
         display: block;
         padding: 1rem;
         background: #fff;
@@ -46,21 +44,27 @@
         margin-bottom: 2rem;
     }
 
-    timeline-item[data-type^="notice"] {
-        border-left: 4px solid #ffc107;
-    }
-
-    timeline-item[data-type^="notice"] > div:first-of-type{
-        display: flex;
-        justify-content: space-between;
+    contest-card score-section{
+        display:flex;
+        height:8rem;
+        justify-content: center;
         align-items: center;
-        color: rgba(0, 0, 0, 0.62);
     }
 
-    timeline-item[data-type^="notice"] > div:last-of-type h5 {
-        font-weight: bold;
-        font-family: Montserrat;
-        margin-bottom: 1rem;
+    contest-card score-section current-score{
+        display:inline-block;
+        font-size:3rem;
+    }
+
+    contest-card score-section tot-score{
+        display:inline-block;
+        font-size:1rem;
+    }
+
+    contest-card score-section span{
+        display:inline-block;
+        font-size:2rem;
+        color: rgba(0,0,0,0.54);
     }
 
     .cm-avatar{
@@ -78,49 +82,28 @@
 </style>
 
 <div class="container mundb-standard-container">
+    <h1 class="cm-title">我的考试</h1>
     <div class="row">
-        <div class="col-sm-12 col-lg-8">
-            <div class="cm-title-section">
-                <h1>Welcome to NOJ!</h1>
-                <version-badge class="mb-5">
-                    <inline-div>Version</inline-div><inline-div>{{version()}}</inline-div>
-                </version-badge>
-
-
-                <p class="mb-5">NOJ is an Online Judge, and yet have features of Virtual Judges as well as an perspective to hold contests over several OJs without knowing the tests and outcomes dataset to enable multiple possibilities like ICPC team routine training and internal contest holding and so on.</p>
-                <p>We've currently support those OJs:</p>
-            </div>
-            <div class="row">
-                @foreach ($ojs as $oj)
-                <div class="col-12 col-sm-6 col-md-4 col-xl-3">
-                    <a href="{{$oj['home_page']}}"><img src="{{$oj['logo']}}" class="cm-oj img-fluid"></a>
-                </div>
-                @endforeach
-            </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <contest-card>
+                <p><i class="MDI school"></i> 大学生诚信教育测试</p>
+                <score-section>
+                    <div>
+                        <current-score>98</current-score>
+                        <tot-score>/ 100</tot-score>
+                    </div>
+                </score-section>
+            </contest-card>
         </div>
-        <div class="col-sm-12 col-lg-4">
-            <p class="cm-anno">Announcement</p>
-            <div>
-                @unless(empty($group_notice))
-                    <timeline-container>
-                        <timeline-item data-type="notice">
-                            <div>
-                                <div>{{$group_notice["name"]}} - {{$group_notice["post_date_parsed"]}} <span class="wemd-green-text">&rtrif; Notice</span></div>
-                                <div><img src="{{$group_notice["avatar"]}}" class="cm-avatar"></div>
-                            </div>
-                            <div>
-                                <h5>{{$group_notice["title"]}}</h5>
-                                <p>{!!$group_notice["content_parsed"]!!}</p>
-                            </div>
-                        </timeline-item>
-                    </timeline-container>
-                @else
-                    <empty-container>
-                        <i class="MDI package-variant"></i>
-                        <p>Currently no announcements.</p>
-                    </empty-container>
-                @endunless
-            </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <contest-card>
+                <p><i class="MDI school"></i> 这是第二个测试</p>
+                <score-section>
+                    <div>
+                        <span>尚未作答</span>
+                    </div>
+                </score-section>
+            </contest-card>
         </div>
     </div>
 </div>

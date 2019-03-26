@@ -13,6 +13,6 @@
 
 Route::redirect('/home', '/', 301);
 
-Route::get('/', 'MainController@home')->middleware('contest_account')->name('home');
+Route::get('/', 'MainController@home')->name('home');
 
 Auth::routes();
