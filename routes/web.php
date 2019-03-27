@@ -20,4 +20,9 @@ Route::group(['prefix' => 'exam'], function () {
     Route::get('/{cid}', 'ExamController@detail')/* ->middleware('auth') */->name('exam_detail');
 });
 
+Route::group(['prefix' => 'test'], function () {
+    Route::redirect('/', '/', 301);
+    Route::get('/{tid}', 'TestController@detail')/* ->middleware('auth') */->name('test_detail');
+});
+
 Auth::routes();
