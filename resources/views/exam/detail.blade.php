@@ -2,7 +2,6 @@
 
 @section('template')
 
-<link rel="stylesheet" href="/static/fonts/Raleway/raleway.css">
 <style>
     paper-card {
         display: block;
@@ -97,46 +96,27 @@
         font-weight: 500;
     }
 
+    .mundb-standard-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    info-badge{
+        display: inline-block;
+        padding-right:1rem;
+        color:rgba(0, 0, 0, 0.54);
+    }
+
 </style>
 
 <div class="container mundb-standard-container">
-    <h1 class="cm-title">我的考试</h1>
-    <div class="row">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <exam-card onclick="location.href='/exam/1'">
-                <h5><i class="MDI school"></i> 大学生诚信教育测试</h5>
-                <score-section>
-                    <div>
-                        <current-score class="wemd-green-text">98</current-score>
-                        <tot-score>/ 100</tot-score>
-                    </div>
-                </score-section>
-                <p><i class="MDI clock"></i> 2019年3月28日 截止</p>
-            </exam-card>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <exam-card onclick="location.href='/exam/1'">
-                <h5><i class="MDI school"></i> 这是第二个测试</h5>
-                <score-section>
-                    <div>
-                        <span>尚未作答</span>
-                    </div>
-                </score-section>
-                <p><i class="MDI clock"></i> 2019年3月28日 截止</p>
-            </exam-card>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <exam-card onclick="location.href='/exam/1'">
-                <h5><i class="MDI school"></i> 大学生第三个测试</h5>
-                <score-section>
-                    <div>
-                        <current-score class="wemd-red-text">86</current-score>
-                        <tot-score>/ 100</tot-score>
-                    </div>
-                </score-section>
-                <p><i class="MDI clock"></i> 2019年3月28日 截止</p>
-            </exam-card>
-        </div>
+    <div class="pt-5 pb-5">
+        <h1 class="cm-title">大学生诚信教育测试</h1>
+        <p><info-badge><i class="MDI clock"></i> 2019年3月28日 截止</info-badge> <info-badge><i class="MDI check-circle"></i> 我的最高得分 98</info-badge></p>
+        <p class="mb-5">诚信，是中华民族的传统美德，是全人类所认同的道德规范。诚信，对于维护社会稳定、提升社会的经济发展等方面都具有重大的意义。当代大学生是国家的未来建设者和接班人，他们的诚信状况将直接关系到我国社会主义现代化建设的顺利进行。因此在现阶段加强对大学生进行诚信教育，提高大学生的诚信意识，构建整个社会的诚信体系具有重要的意义。</p>
+        <button type="button" class="btn btn-raised btn-primary">开始测试</button>
+        <button type="button" class="btn btn-raised btn-secondary">历史纪录</button>
     </div>
 </div>
 <script>

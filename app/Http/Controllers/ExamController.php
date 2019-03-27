@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use Auth;
 
 
-class MainController extends Controller
+class ExamController extends Controller
 {
-    public function home(Request $request)
+    public function detail(Request $request)
     {
-        return view('home', [
-                'page_title'=>"首页",
+        return view('exam.detail', [
+                'page_title'=>"详情",
                 'site_title'=>"贝尔英才学院诚信考试系统",
                 'navigation' => "Home",
             ]);

@@ -137,7 +137,7 @@
     <div class="mundb-background-container">
         <img src="">
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom:30px;position:sticky;top:0;z-index:999;flex-shrink: 0;flex-grow: 0;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:sticky;top:0;z-index:999;flex-shrink: 0;flex-grow: 0;">
             <a class="navbar-brand" href="/">
                 <img src="/static/img/njupt.png" height="30"> 贝尔英才学院诚信考试系统
             </a>
@@ -211,7 +211,7 @@
     @yield('addition')
 
     <footer class="d-print-none bg-dark center-on-small-only" style="flex-shrink: 0;flex-grow: 0">
-        <div class="mundb-footer mundb-copyright">&copy; 2018-{{date('Y')}}, Bell Honors School. <a href="https://github.com/ZsgsDesign/BHSExamSystem" target="_blank"><i class="MDI github-circle"></i></a></div>
+        <div class="mundb-footer mundb-copyright">&copy; {{date('Y')}}, Bell Honors School. <a href="https://github.com/ZsgsDesign/BHSExamSystem" target="_blank"><i class="MDI github-circle"></i></a></div>
     </footer>
     <script src="/static/library/jquery/dist/jquery.min.js"></script>
     <script src="/static/js/popper.min.js"></script>
