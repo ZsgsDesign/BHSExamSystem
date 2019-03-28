@@ -13,16 +13,16 @@
 
 Route::redirect('/home', '/', 301);
 
-Route::get('/', 'MainController@home')/* ->middleware('auth') */->name('home');
+Route::get('/', 'MainController@home')->middleware('auth')->name('home');
 
 Route::group(['prefix' => 'exam'], function () {
     Route::redirect('/', '/', 301);
-    Route::get('/{cid}', 'ExamController@detail')/* ->middleware('auth') */->name('exam_detail');
+    Route::get('/{cid}', 'ExamController@detail')->middleware('auth')->name('exam_detail');
 });
 
 Route::group(['prefix' => 'test'], function () {
     Route::redirect('/', '/', 301);
-    Route::get('/{tid}', 'TestController@detail')/* ->middleware('auth') */->name('test_detail');
+    Route::get('/{tid}', 'TestController@detail')->middleware('auth')->name('test_detail');
 });
 
 Auth::routes();

@@ -158,29 +158,12 @@
             <ul class="navbar-nav mundb-nav-right">
                 <li class="nav-item mundb-no-shrink />">
                     @guest
-                        <a class="nav-link @if ($navigation === "Account") active @endif" href="/account">登录</a>
+                        <a class="nav-link @if ($navigation === "Account") active @endif" href="/login">登录</a>
                     @else
                         <li class="nav-item dropdown mundb-btn-ucenter">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()["name"] }}</a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-header"><img src="{{ Auth::user()->avatar }}" class="mundb-avatar" id="atsast_nav_avatar" /><div><h6>{{ Auth::user()["name"] }}<br/><small>{{ Auth::user()->email }}</small></h6></div></div>
-                                <!--
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/account/dashboard"><i class="MDI account-circle"></i> Dashboard</a>
-                                <a class="dropdown-item" href="/account/submissions"><i class="MDI airballoon"></i> Submissions</a>
-                                <a class="dropdown-item" href="/account/settings"><i class="MDI settings"></i> Advanced Settings</a>
-                                -->
-                                @if ("admin"===false)
-                                <!--
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/admin"><i class="MDI view-dashboard"></i> Admin Tools</a>
-                                -->
-                                @endif
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/system/info"><i class="MDI information-outline"></i> System Info</a>
-                                <!--
-                                <a class="dropdown-item" href="/system/bugs"><i class="MDI bug"></i> Report BUG</a>
-                                -->
                                 <div class="dropdown-divider"></div>
                                 <a  class="dropdown-item text-danger"
                                     href="{{ route('logout') }}"

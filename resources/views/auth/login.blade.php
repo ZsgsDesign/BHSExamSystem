@@ -88,31 +88,17 @@
     <div class="row justify-content-sm-center">
         <div class="col-sm-12 col-md-8 col-lg-6">
             <div class="text-center" style="margin-top:10vh;margin-bottom:20px;">
-                <h1 style="padding:20px;display:inline-block;">NOJ</h1>
-                <p>NOJ's yet another Virtual Judge</p>
-                <div class="alert alert-primary text-left" role="alert">
-                    NOJ is still under alpha version, you can create new issues <a href="https://github.com/ZsgsDesign/NOJ/issues">here</a>.
-                </div>
+                <h1 style="padding:20px;display:inline-block;">诚信考试系统</h1>
+                <p>贝尔英才学院</p>
             </div>
             <div class="card">
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs nav-justified nav-tabs-material" id="accountTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">register</a>
-                        </li>
-                        <div class="nav-tabs-indicator" id="nav-tabs-indicator" style="left: 0px;"></div>
-                    </ul>
-                </div>
                 <div class="tab-content" id="accountTabContent">
                     <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
                         <form class="needs-validation" action="{{ route('login') }}" method="post" id="login_form" novalidate>
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="email" class="bmd-label-floating">Email</label>
+                                    <label for="email" class="bmd-label-floating">邮箱</label>
                                     <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" id="email" required>
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
@@ -121,7 +107,7 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="password" class="bmd-label-floating">Password</label>
+                                    <label for="password" class="bmd-label-floating">密码</label>
                                     <input type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" id="password" required>
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert">
@@ -131,13 +117,12 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="checkbox">
-                                        <label for="remember"><input class="form-control" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}><span>{{ __('Remember Me') }}</span></label>
+                                        <label for="remember"><input class="form-control" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}><span>记住我</span></label>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer text-right">
-                                <a href="{{ route('password.request') }}"><button type="button" class="btn btn-secondary">Forget your password?</button></a>
-                                <button type="submit" class="btn btn-danger">Login</button>
+                                <button type="submit" class="btn btn-danger">登录</button>
                             </div>
                         </form>
                     </div>
@@ -148,14 +133,6 @@
 </div>
 <script>
     window.addEventListener("load",function() {
-        $('#login-tab').on('click', function (e) {
-            e.preventDefault();
-        })
-        $('#register-tab').on('click', function (e) {
-            e.preventDefault();
-            location.href="/register";
-        })
-
         $('input:-webkit-autofill').each(function(){
             if ($(this).val().length !== "") {
                 console.log($(this).siblings('label'));

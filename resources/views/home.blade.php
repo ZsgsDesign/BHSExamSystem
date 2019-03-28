@@ -102,9 +102,11 @@
 <div class="container mundb-standard-container">
     <h1 class="cm-title">我的考试</h1>
     <div class="row">
+        @foreach ($exams as $e)
+
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <exam-card onclick="location.href='/exam/1'">
-                <h5><i class="MDI school"></i> 大学生诚信教育测试</h5>
+                <h5><i class="MDI school"></i> {{$e["exam_name"]}}</h5>
                 <score-section>
                     <div>
                         <current-score class="wemd-green-text">98</current-score>
@@ -114,6 +116,9 @@
                 <p><i class="MDI clock"></i> 2019年3月28日 截止</p>
             </exam-card>
         </div>
+
+        @endforeach
+{{--
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <exam-card onclick="location.href='/exam/1'">
                 <h5><i class="MDI school"></i> 这是第二个测试</h5>
@@ -136,7 +141,7 @@
                 </score-section>
                 <p><i class="MDI clock"></i> 2019年3月28日 截止</p>
             </exam-card>
-        </div>
+        </div> --}}
     </div>
 </div>
 <script>
