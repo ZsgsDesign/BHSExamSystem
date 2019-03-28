@@ -12,7 +12,7 @@ class MainController extends Controller
     public function home(Request $request)
     {
         $examModel=new ExamModel();
-        $examList=$examModel->list();
+        $examList=$examModel->list(Auth::user()->id);
         return view('home', [
                 'page_title'=>"首页",
                 'site_title'=>"贝尔英才学院诚信考试系统",

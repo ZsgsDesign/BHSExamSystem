@@ -17,7 +17,7 @@ Route::get('/', 'MainController@home')->middleware('auth')->name('home');
 
 Route::group(['prefix' => 'exam'], function () {
     Route::redirect('/', '/', 301);
-    Route::get('/{cid}', 'ExamController@detail')->middleware('auth')->name('exam_detail');
+    Route::get('/{eid}', 'ExamController@detail')->middleware('auth')->name('exam_detail');
 });
 
 Route::group(['prefix' => 'test'], function () {

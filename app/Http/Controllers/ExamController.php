@@ -2,14 +2,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\ExamModel;
 use Illuminate\Http\Request;
-use Auth;
+use Auth,Redirect;
 
 
 class ExamController extends Controller
 {
-    public function detail(Request $request)
+    public function detail($eid)
     {
+        $examModel=new ExamModel();
+        $examDetail=$examModel->detail($eid, Auth::user()->id);
+        if(is_null($examDetail)){
+            return Redirect::route('home');
+        }
         return view('exam.detail', [
                 'page_title'=>"详情",
                 'site_title'=>"贝尔英才学院诚信考试系统",

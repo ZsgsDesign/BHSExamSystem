@@ -104,18 +104,22 @@
     <div class="row">
         @foreach ($exams as $e)
 
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <exam-card onclick="location.href='/exam/1'">
-                <h5><i class="MDI school"></i> {{$e["exam_name"]}}</h5>
-                <score-section>
-                    <div>
-                        <current-score class="wemd-green-text">98</current-score>
-                        <tot-score>/ 100</tot-score>
-                    </div>
-                </score-section>
-                <p><i class="MDI clock"></i> 2019年3月28日 截止</p>
-            </exam-card>
-        </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <exam-card onclick="location.href='/exam/{{$e["eid"]}}'">
+                    <h5><i class="MDI school"></i> {{$e["exam_name"]}}</h5>
+                    <score-section>
+                        <div>
+                            @if(is_null($e["score"]))
+                                <span>尚未作答</span>
+                            @else
+                                <current-score class="{{$e["score"]>=$e["exam_line"]?"wemd-green-text":"wemd-red-text"}}">{{$e["score"]}}</current-score>
+                                <tot-score>/ 100</tot-score>
+                            @endif
+                        </div>
+                    </score-section>
+                    <p><i class="MDI clock"></i> 2019年3月28日 截止</p>
+                </exam-card>
+            </div>
 
         @endforeach
 {{--
