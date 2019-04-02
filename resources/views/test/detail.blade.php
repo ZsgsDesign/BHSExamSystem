@@ -34,7 +34,7 @@
         padding-left: 1rem;
     }
 
-    .cm-title span{
+    .cm-title small{
         color: rgba(0, 0, 0, 0.54);
         font-size: 50%;
     }
@@ -167,32 +167,22 @@
 
 <div class="container mundb-standard-container">
     <div class="pt-5 pb-5">
-        <div class="cm-title"><h1>大学生诚信教育测试</h1><h1>1<span> / 50</span></h1></div>
+        <div class="cm-title"><h1>大学生诚信教育测试</h1><h1><span>1</span><small> / 50</small></h1></div>
         <p class="mb-5"><info-badge><i class="MDI clock"></i> 00:30:00</info-badge> <info-badge><i class="MDI buffer"></i> 50 题</info-badge> </p>
         <test-card data-pcode="1">
             <div class="tab-content">
-                    <div class="tab-pane fade active show" role="tabpanel" id="pcode1">
+                @foreach ($testProb as $p)
+                    <div class="tab-pane fade @unless($loop->index) active show @endunless" role="tabpanel" id="pcode{{$p["pcode"]}}">
                         <div class="animated fadeIn">
-                            <p>1. 居庙堂之高则忧其民，【 】。</p>
+                            <p>{{$p["pcode"]}}. {{$p["desc"]}}</p>
                             <choice-section>
-                                <choice-item onclick="selectChoice(this)" data-pcode="1" data-md5="8597875dbc6ea3a89cb74c2f102e991c" data-acode="A">处江湖之远则忧其君</choice-item>
-                                <choice-item onclick="selectChoice(this)" data-pcode="1" data-md5="316cfaf5d488b2895a382f8beaf05b44" data-acode="B">处江湖之远泽忧其君</choice-item>
-                                <choice-item onclick="selectChoice(this)" data-pcode="1" data-md5="f7932a1b2c30a9322ca7eb21ed04e576" data-acode="C">处江湖之远泽忧其民</choice-item>
-                                <choice-item onclick="selectChoice(this)" data-pcode="1" data-md5="78253a47640ca2230e3429f30eb9e3a6" data-acode="D">处江湖之远则忧其民</choice-item>
+                                @foreach ($p["choices"] as $c)
+                                    <choice-item onclick="selectChoice(this)" data-pcode="{{$p["pcode"]}}" data-md5="{{$c["md5"]}}" data-acode="{{chr(65+$loop->index)}}">{{$c["content"]}}</choice-item>
+                                @endforeach
                             </choice-section>
                         </div>
                     </div>
-                    <div class="tab-pane fade" role="tabpanel" id="pcode2">
-                        <div class="animated fadeIn">
-                            <p>2. 居庙堂之高则忧其民，【 】。</p>
-                            <choice-section>
-                                <choice-item onclick="selectChoice(this)" data-pcode="2" data-md5="8597875dbc6ea3a89cb74c2f102e991c" data-acode="A">处江湖之远则忧其君</choice-item>
-                                <choice-item onclick="selectChoice(this)" data-pcode="2" data-md5="316cfaf5d488b2895a382f8beaf05b44" data-acode="B">处江湖之远泽忧其君</choice-item>
-                                <choice-item onclick="selectChoice(this)" data-pcode="2" data-md5="f7932a1b2c30a9322ca7eb21ed04e576" data-acode="C">处江湖之远泽忧其民</choice-item>
-                                <choice-item onclick="selectChoice(this)" data-pcode="2" data-md5="78253a47640ca2230e3429f30eb9e3a6" data-acode="D">处江湖之远则忧其民</choice-item>
-                            </choice-section>
-                        </div>
-                    </div>
+                @endforeach
             </div>
             <action-section role="tablist">
                 <button type="button" class="btn btn-primary" id="prevProb" onclick="prevProb()" disabled><i class="MDI arrow-left-bold"></i> 上一题</button>
@@ -204,7 +194,7 @@
 <script>
 
     var curProb=1;
-    var maxProb=2;
+    var maxProb=50;
     var minProb=1;
 
     window.addEventListener("load",function() {
@@ -234,6 +224,7 @@
             $(`#pcode${curProb}`).addClass("show");
             $(`#pcode${curProb}`).addClass("fadeIn");
             $(`#pcode${curProb}`).removeClass("fadeOut");
+            $(".cm-title span").text(curProb);
         }
         if(curProb>minProb){
             $("#prevProb").attr("disabled",false);
@@ -258,6 +249,7 @@
             $(`#pcode${curProb}`).addClass("show");
             $(`#pcode${curProb}`).addClass("fadeIn");
             $(`#pcode${curProb}`).removeClass("fadeOut");
+            $(".cm-title span").text(curProb);
         }
         if(curProb<=minProb){
             $("#prevProb").attr("disabled",true);
