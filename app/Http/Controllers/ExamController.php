@@ -20,6 +20,7 @@ class ExamController extends Controller
                 'page_title'=>"详情",
                 'site_title'=>"贝尔英才学院诚信考试系统",
                 'navigation' => "Home",
+                'detail'=>$examDetail
             ]);
     }
 }

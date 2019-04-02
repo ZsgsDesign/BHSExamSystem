@@ -117,7 +117,7 @@
                             @endif
                         </div>
                     </score-section>
-                    <p><i class="MDI clock"></i> 2019年3月28日 截止</p>
+                    <p><i class="MDI clock"></i> {{$e["exam_due"]}} 截止</p>
                 </exam-card>
             </div>
 

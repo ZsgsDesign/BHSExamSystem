@@ -111,7 +111,7 @@
     test-card choice-section choice-item::before{
         display: inline-block;
         line-height: 2rem;
-        content: attr(data-ncode);
+        content: attr(data-acode);
         margin-right:1rem;
         width:2rem;
         height: 2rem;
@@ -155,23 +155,48 @@
         pointer-events: none;
     }
 
+    .tab-pane.fade{
+        pointer-events: none!important;
+    }
+
+    .tab-pane.fade.show{
+        pointer-events: auto!important;
+    }
+
 </style>
 
 <div class="container mundb-standard-container">
     <div class="pt-5 pb-5">
         <div class="cm-title"><h1>大学生诚信教育测试</h1><h1>1<span> / 50</span></h1></div>
         <p class="mb-5"><info-badge><i class="MDI clock"></i> 00:30:00</info-badge> <info-badge><i class="MDI buffer"></i> 50 题</info-badge> </p>
-        <test-card>
-            <p>1. 居庙堂之高则忧其民，【 】。</p>
-            <choice-section>
-                <choice-item onclick="selectChoice(this)" data-md5="8597875dbc6ea3a89cb74c2f102e991c" data-ncode="A">处江湖之远则忧其君</choice-item>
-                <choice-item onclick="selectChoice(this)" data-md5="316cfaf5d488b2895a382f8beaf05b44" data-ncode="B">处江湖之远泽忧其君</choice-item>
-                <choice-item onclick="selectChoice(this)" data-md5="f7932a1b2c30a9322ca7eb21ed04e576" data-ncode="C">处江湖之远泽忧其民</choice-item>
-                <choice-item onclick="selectChoice(this)" data-md5="78253a47640ca2230e3429f30eb9e3a6" data-ncode="D">处江湖之远则忧其民</choice-item>
-            </choice-section>
-            <action-section>
-                <button type="button" class="btn btn-primary" onclick="prevProb()" disabled><i class="MDI arrow-left-bold"></i> 上一题</button>
-                <button type="button" class="btn btn-primary" onclick="nextProb()">下一题 <i class="MDI arrow-right-bold"></i></button>
+        <test-card data-pcode="1">
+            <div class="tab-content">
+                    <div class="tab-pane fade active show" role="tabpanel" id="pcode1">
+                        <div class="animated fadeIn">
+                            <p>1. 居庙堂之高则忧其民，【 】。</p>
+                            <choice-section>
+                                <choice-item onclick="selectChoice(this)" data-pcode="1" data-md5="8597875dbc6ea3a89cb74c2f102e991c" data-acode="A">处江湖之远则忧其君</choice-item>
+                                <choice-item onclick="selectChoice(this)" data-pcode="1" data-md5="316cfaf5d488b2895a382f8beaf05b44" data-acode="B">处江湖之远泽忧其君</choice-item>
+                                <choice-item onclick="selectChoice(this)" data-pcode="1" data-md5="f7932a1b2c30a9322ca7eb21ed04e576" data-acode="C">处江湖之远泽忧其民</choice-item>
+                                <choice-item onclick="selectChoice(this)" data-pcode="1" data-md5="78253a47640ca2230e3429f30eb9e3a6" data-acode="D">处江湖之远则忧其民</choice-item>
+                            </choice-section>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" role="tabpanel" id="pcode2">
+                        <div class="animated fadeIn">
+                            <p>2. 居庙堂之高则忧其民，【 】。</p>
+                            <choice-section>
+                                <choice-item onclick="selectChoice(this)" data-pcode="2" data-md5="8597875dbc6ea3a89cb74c2f102e991c" data-acode="A">处江湖之远则忧其君</choice-item>
+                                <choice-item onclick="selectChoice(this)" data-pcode="2" data-md5="316cfaf5d488b2895a382f8beaf05b44" data-acode="B">处江湖之远泽忧其君</choice-item>
+                                <choice-item onclick="selectChoice(this)" data-pcode="2" data-md5="f7932a1b2c30a9322ca7eb21ed04e576" data-acode="C">处江湖之远泽忧其民</choice-item>
+                                <choice-item onclick="selectChoice(this)" data-pcode="2" data-md5="78253a47640ca2230e3429f30eb9e3a6" data-acode="D">处江湖之远则忧其民</choice-item>
+                            </choice-section>
+                        </div>
+                    </div>
+            </div>
+            <action-section role="tablist">
+                <button type="button" class="btn btn-primary" id="prevProb" onclick="prevProb()" disabled><i class="MDI arrow-left-bold"></i> 上一题</button>
+                <button class="btn btn-primary" id="nextProb" onclick="nextProb()">下一题 <i class="MDI arrow-right-bold"></i></button>
             </action-section>
         </test-card>
     </div>
@@ -179,6 +204,8 @@
 <script>
 
     var curProb=1;
+    var maxProb=2;
+    var minProb=1;
 
     window.addEventListener("load",function() {
 
@@ -186,20 +213,60 @@
 
     function selectChoice(e){
         console.log($(e).attr("data-md5"));
-        $("choice-item").removeClass("bhs-selected");
+        $(`choice-item[data-pcode="${$(e).attr("data-pcode")}"]`).removeClass("bhs-selected");
         $(e).addClass("bhs-selected");
     }
 
     function submitAns(){
-
+        alert("提交问题");
     }
 
     function nextProb(){
-
+        if(curProb>=maxProb){
+            return submitAns();
+        }else{
+            $(`#pcode${curProb}`).removeClass("active");
+            $(`#pcode${curProb}`).removeClass("show");
+            $(`#pcode${curProb}`).removeClass("fadeIn");
+            $(`#pcode${curProb}`).addClass("fadeOut");
+            curProb++;
+            $(`#pcode${curProb}`).addClass("active");
+            $(`#pcode${curProb}`).addClass("show");
+            $(`#pcode${curProb}`).addClass("fadeIn");
+            $(`#pcode${curProb}`).removeClass("fadeOut");
+        }
+        if(curProb>minProb){
+            $("#prevProb").attr("disabled",false);
+        }
+        if(curProb>=maxProb){
+            $("#nextProb").html(`提交 <i class="MDI send"></i>`);
+            $("#nextProb").addClass("btn-warning");
+            $("#nextProb").removeClass("btn-primary");
+        }
     }
 
     function prevProb(){
-
+        if(curProb<=minProb){
+            return;
+        }else{
+            $(`#pcode${curProb}`).removeClass("active");
+            $(`#pcode${curProb}`).removeClass("show");
+            $(`#pcode${curProb}`).removeClass("fadeIn");
+            $(`#pcode${curProb}`).addClass("fadeOut");
+            curProb--;
+            $(`#pcode${curProb}`).addClass("active");
+            $(`#pcode${curProb}`).addClass("show");
+            $(`#pcode${curProb}`).addClass("fadeIn");
+            $(`#pcode${curProb}`).removeClass("fadeOut");
+        }
+        if(curProb<=minProb){
+            $("#prevProb").attr("disabled",true);
+        }
+        if(curProb<maxProb){
+            $("#nextProb").html(`下一题 <i class="MDI arrow-right-bold"></i>`);
+            $("#nextProb").removeClass("btn-warning");
+            $("#nextProb").addClass("btn-primary");
+        }
     }
 
 </script>
