@@ -25,4 +25,10 @@ Route::group(['prefix' => 'test'], function () {
     Route::get('/{tid}', 'TestController@detail')->middleware('auth')->name('test_detail');
 });
 
+Route::group(['prefix' => 'ajax', 'namespace' => 'Ajax'], function () {
+    Route::group(['prefix' => 'test'], function () {
+        Route::post('submitAns', 'TestController@submitAns');
+    });
+});
+
 Auth::routes();

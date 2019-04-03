@@ -49,4 +49,23 @@ class TestModel extends Model
         $info["remaining"]=strtotime($info["due_time"])-time();
         return $info;
     }
+
+    public function submitAns($tid, $ans)
+    {
+        $finalScore=0;
+        foreach($ans as $pcode=>$md5){
+            $probInfo=DB::table("test_problem")->where(["tid"=>$tid,"pcode"=>$pcode])->get()->first();
+            if(empty($probInfo)) continue;
+            $pid=$probInfo["pid"];
+            $correctAns=DB::table("problem")->where(["pid"=>$pid])->get()->first()["correctAns"];
+            DB::table("test_problem")->where(["tid"=>$tid,"pcode"=>$pcode])->update([
+                "cur_ans"=>$md5,
+                "cur_score"=>$md5==$correctAns?2:0
+            ]);
+            $finalScore+=$md5==$correctAns?2:0;
+        }
+        DB::table("test")->where(["tid"=>$tid])->update([
+            "score"=>$finalScore
+        ]);
+    }
 }

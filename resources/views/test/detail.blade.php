@@ -234,12 +234,12 @@
         if(submitting) return;
         if(retry==0){
             alert("多次提交失败！");
-            location.refresh;
+            location.reload();
         }
         submitting=true;
         $.ajax({
             type: 'POST',
-            url: '/ajax/submitAns',
+            url: '/ajax/test/submitAns',
             data: {
                 tid: {{$testInfo["tid"]}},
                 ans: getAns()
@@ -251,7 +251,7 @@
                 console.log(ret);
                 if(ret.ret==200){
                     alert("提交成功！");
-                    location.refresh();
+                    location.reload();
                 } else {
                     alert(ret.desc);
                 }
