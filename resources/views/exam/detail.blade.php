@@ -125,7 +125,7 @@
     }, false);
 
     function startTest(){
-        location.href="/test/1";
+        location.href="{{route('exam_start', ['eid' => $detail['eid']])}}";
     }
 
 </script>

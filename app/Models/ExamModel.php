@@ -43,13 +43,13 @@ class ExamModel extends Model
     {
         $problemSet=DB::table("problem")->where(["eid"=>$eid])->get()->all();
         $randomProb=array_rand($problemSet,50);
-        $tid=DB::table("test_problem")->insertGetId([
+        $tid=DB::table("test")->insertGetId([
             'uid'=>$uid,
             'eid'=>$eid,
             'score'=>-1,
             'due_time'=>date("Y-m-d H:i:s", time()+1800)
         ]);
-        $i=0;
+        $i=1;
         foreach($randomProb as $r){
             DB::table("test_problem")->insert([
                 'tid'=>$tid,
