@@ -167,8 +167,8 @@
 
 <div class="container mundb-standard-container">
     <div class="pt-5 pb-5">
-        <div class="cm-title"><h1>大学生诚信教育测试</h1><h1><span>1</span><small> / 50</small></h1></div>
-        <p class="mb-5"><info-badge><i class="MDI clock"></i> 00:30:00</info-badge> <info-badge><i class="MDI buffer"></i> 50 题</info-badge> </p>
+        <div class="cm-title"><h1>{{$examInfo["exam_name"]}}</h1><h1><span>1</span><small> / 50</small></h1></div>
+        <p class="mb-5"><info-badge><i class="MDI clock"></i> <span id="hh">00</span>:<span id="mm">00</span>:<span id="ss">00</span></info-badge> <info-badge><i class="MDI buffer"></i> 50 题</info-badge> </p>
         <test-card data-pcode="1">
             <div class="tab-content">
                 @foreach ($testProb as $p)
@@ -196,6 +196,25 @@
     var curProb=1;
     var maxProb=50;
     var minProb=1;
+    var remaining="{{$testInfo['remaining']}}";
+    var submitting=false;
+
+    changeTime();
+
+    var countdownTimer=setInterval(function(){
+        remaining--;
+        changeTime();
+        if(remaining<=0){
+            forceSubmit();
+            clearInterval(countdownTimer);
+        }
+    },1000);
+
+    function changeTime(){
+        document.getElementById("hh").innerText=(parseInt(remaining/3600)<10?"0":"")+parseInt(remaining/3600);
+        document.getElementById("mm").innerText=(parseInt(remaining%3600/60)<10?"0":"")+parseInt(remaining%3600/60);
+        document.getElementById("ss").innerText=(parseInt(remaining%60)<10?"0":"")+parseInt(remaining%60);
+    }
 
     window.addEventListener("load",function() {
 
@@ -207,8 +226,56 @@
         $(e).addClass("bhs-selected");
     }
 
-    function submitAns(){
-        alert("提交问题");
+    function forceSubmit() {
+        submitAns(true);
+    }
+
+    function submitAns(force=false,retry=5) {
+        if(submitting) return;
+        if(retry==0){
+            alert("多次提交失败！");
+            location.refresh;
+        }
+        submitting=true;
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/submitAns',
+            data: {
+                tid: {{$testInfo["tid"]}},
+                ans: getAns()
+            },
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }, success: function(ret){
+                console.log(ret);
+                if(ret.ret==200){
+                    alert("提交成功！");
+                    location.refresh();
+                } else {
+                    alert(ret.desc);
+                }
+            }, error: function(xhr, type){
+                console.log(xhr);
+                switch(xhr.status) {
+                    case 422:
+                        alert(xhr.responseJSON.errors[Object.keys(xhr.responseJSON.errors)[0]][0], xhr.responseJSON.message);
+                        break;
+                    default:
+                        alert("服务器连接错误");
+                }
+                submitting=false;
+                if(force) submitAns(true,retry-1);
+            }
+        });
+    }
+
+    function getAns(){
+        var ansList={};
+        $(`.tab-pane[id^="pcode"]`).each(function(i,e){
+            ansList[i+1]=$(e).find(".bhs-selected").attr("data-md5");
+        });
+        return ansList;
     }
 
     function nextProb(){
