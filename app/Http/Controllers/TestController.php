@@ -23,8 +23,9 @@ class TestController extends Controller
         }
         $examInfo=$examModel->basic($testInfo["eid"]);
         $testInfo["end"]=$testInfo["remaining"]<0;
+        $testInfo["status"]=$testInfo["score"]+1;
         $testProb=$testModel->getProb($tid);
-        return $testInfo["end"]?view('test.complete', [
+        return $testInfo["status"]?view('test.complete', [
             'page_title'=>"测试结果",
             'site_title'=>"贝尔英才学院诚信考试系统",
             'navigation' => "Home",
