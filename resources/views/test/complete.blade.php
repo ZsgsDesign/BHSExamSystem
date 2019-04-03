@@ -154,13 +154,24 @@
         pointer-events: auto!important;
     }
 
+    .mundb-standard-container {
+        flex-shrink: 0;
+        flex-grow: 1;
+        padding-top: 0;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
 </style>
 
 <div class="container mundb-standard-container">
     <div class="pt-5 pb-5" style="text-align: center;">
         <h1><span class="{{$testInfo["score"]>=$examInfo["exam_line"]?"wemd-green-text":"wemd-red-text"}}">{{$testInfo["score"]}}</span> <small>/ 100</small></h1>
-        <h1>大学生诚信教育测试</h1>
-        <p>未通过</p>
+        <h1 class="mb-0">{{$examInfo["exam_name"]}}</h1>
+        <p class="mb-5"><i class="MDI {{$testInfo["score"]>=$examInfo["exam_line"]?"check-circle":"close-circle"}}"></i> 本次测试{{$testInfo["score"]>=$examInfo["exam_line"]?"已":"未"}}通过</p>
+        <a href="/exam/{{$examInfo["eid"]}}"><button type="button" class="btn btn-raised btn-primary">再测一次</button></a>
+        <a href="/"><button type="button" class="btn btn-raised btn-secondary">返回首页</button></a>
     </div>
 </div>
 <script>
