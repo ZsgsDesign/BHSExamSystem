@@ -46,7 +46,7 @@ class TestModel extends Model
     public function basic($tid)
     {
         $info=DB::table($this->tableName)->where(["tid"=>$tid])->get()->first();
-        $info["remaining"]=time()-strtotime($info["due_time"]);
+        $info["remaining"]=strtotime($info["due_time"])-time();
         return $info;
     }
 }

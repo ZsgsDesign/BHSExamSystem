@@ -21,7 +21,12 @@ class TestController extends Controller
         }
         $testInfo["end"]=$testInfo["remaining"]<0;
         $testProb=$testModel->getProb($tid);
-        return view('test.detail', [
+        return $testInfo["end"]?view('test.complete', [
+            'page_title'=>"测试结果",
+            'site_title'=>"贝尔英才学院诚信考试系统",
+            'navigation' => "Home",
+            "testInfo"=>$testInfo
+        ]):view('test.detail', [
             'page_title'=>"测试",
             'site_title'=>"贝尔英才学院诚信考试系统",
             'navigation' => "Home",
