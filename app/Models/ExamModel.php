@@ -32,4 +32,26 @@ class ExamModel extends Model
     {
         return DB::table($this->tableName)->where(["eid"=>$eid])->get()->first();
     }
+
+    public function generateTest($eid,$uid)
+    {
+        $problemSet=DB::table("problem")->where(["eid"=>$eid])->get()->all();
+        $randomProb=array_rand($problemSet,50);
+        $tid=DB::table("test_problem")->insertGetId([
+            'uid'=>$uid,
+            'eid'=>$eid,
+            'score'=>-1,
+            'due_time'=>date("Y-m-d H:i:s", time()+1800)
+        ]);
+        $i=0;
+        foreach($randomProb as $r){
+            DB::table("test_problem")->insert([
+                'tid'=>$tid,
+                'pid'=>$problemSet[$r]["pid"],
+                'pcode'=>$i,
+                'cur_score'=>-1,
+            ]);
+            $i++;
+        }
+    }
 }
