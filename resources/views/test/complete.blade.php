@@ -20,21 +20,12 @@
         box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 40px;
     }
 
-    .cm-title{
+    h1{
         margin-bottom:2rem;
         color: #3E4551;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
 
-    .cm-title h1:last-of-type{
-        flex-shrink: 0;
-        flex-grow: 0;
-        padding-left: 1rem;
-    }
-
-    .cm-title small{
+    h1 small{
         color: rgba(0, 0, 0, 0.54);
         font-size: 50%;
     }
@@ -166,9 +157,10 @@
 </style>
 
 <div class="container mundb-standard-container">
-    <div class="pt-5 pb-5">
-        <div class="cm-title"><h1>大学生诚信教育测试</h1></div>
-        <h1>{{$testInfo["score"]}}</h1>
+    <div class="pt-5 pb-5" style="text-align: center;">
+        <h1><span class="{{$testInfo["score"]>=$examInfo["exam_line"]?"wemd-green-text":"wemd-red-text"}}">{{$testInfo["score"]}}</span> <small>/ 100</small></h1>
+        <h1>大学生诚信教育测试</h1>
+        <p>未通过</p>
     </div>
 </div>
 <script>

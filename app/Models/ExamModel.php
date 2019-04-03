@@ -27,4 +27,9 @@ class ExamModel extends Model
         $basic["score"]=DB::table("test")->where(["eid"=>$basic["eid"],"uid"=>$uid])->orderBy('score', 'desc')->first()["score"];
         return $basic;
     }
+
+    public function basic($eid)
+    {
+        return DB::table($this->tableName)->where(["eid"=>$eid])->get()->first();
+    }
 }
