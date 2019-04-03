@@ -45,7 +45,7 @@ class TestModel extends Model
 
     public function basic($tid)
     {
-        $info=DB::table($this->tableName)->where(["tid"=>$tid])->get()->first();
+        $info=DB::table($this->tableName)->where(["tid"=>$tid])->first();
         $info["remaining"]=strtotime($info["due_time"])-time();
         return $info;
     }
@@ -54,10 +54,10 @@ class TestModel extends Model
     {
         $finalScore=0;
         foreach($ans as $pcode=>$md5){
-            $probInfo=DB::table("test_problem")->where(["tid"=>$tid,"pcode"=>$pcode])->get()->first();
+            $probInfo=DB::table("test_problem")->where(["tid"=>$tid,"pcode"=>$pcode])->first();
             if(empty($probInfo)) continue;
             $pid=$probInfo["pid"];
-            $correctAns=DB::table("problem")->where(["pid"=>$pid])->get()->first()["correctAns"];
+            $correctAns=DB::table("problem")->where(["pid"=>$pid])->first()["correctAns"];
             DB::table("test_problem")->where(["tid"=>$tid,"pcode"=>$pcode])->update([
                 "cur_ans"=>$md5,
                 "cur_score"=>$md5==$correctAns?2:0

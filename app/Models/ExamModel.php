@@ -20,7 +20,7 @@ class ExamModel extends Model
 
     public function detail($eid, $uid)
     {
-        $basic=DB::table($this->tableName)->where(["available"=>1,"eid"=>$eid])->get()->first();
+        $basic=DB::table($this->tableName)->where(["available"=>1,"eid"=>$eid])->first();
         if(empty($basic)){
             return null;
         }
@@ -30,7 +30,13 @@ class ExamModel extends Model
 
     public function basic($eid)
     {
-        return DB::table($this->tableName)->where(["eid"=>$eid])->get()->first();
+        return DB::table($this->tableName)->where(["eid"=>$eid])->first();
+    }
+
+    public function startTest($eid,$uid)
+    {
+        $basic=DB::table("test")->where(["eid"=>$eid,"uid"=>$uid])->where("due_time",">",date("Y-m-d H:i:s"))->first();
+        return empty($basic)?$this->generateTest($eid,$uid):$basic["tid"];
     }
 
     public function generateTest($eid,$uid)
@@ -53,5 +59,6 @@ class ExamModel extends Model
             ]);
             $i++;
         }
+        return $tid;
     }
 }

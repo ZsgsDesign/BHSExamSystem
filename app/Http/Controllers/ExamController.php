@@ -23,4 +23,17 @@ class ExamController extends Controller
                 'detail'=>$examDetail
             ]);
     }
+
+    public function start($eid)
+    {
+        $examModel=new ExamModel();
+        $examDetail=$examModel->detail($eid, Auth::user()->id);
+        if(is_null($examDetail)){
+            return Redirect::route('home');
+        }
+        $tid=$examModel->startTest($eid, Auth::user()->id);
+        return Redirect::route('test_detail', [
+            "tid"=>$tid
+        ]);
+    }
 }
