@@ -35,7 +35,7 @@ class ExamModel extends Model
 
     public function startTest($eid,$uid)
     {
-        $basic=DB::table("test")->where(["eid"=>$eid,"uid"=>$uid])->where("due_time",">",date("Y-m-d H:i:s"))->first();
+        $basic=DB::table("test")->where(["eid"=>$eid,"uid"=>$uid,"score"=>-1])->where("due_time",">",date("Y-m-d H:i:s"))->first();
         return empty($basic)?$this->generateTest($eid,$uid):$basic["tid"];
     }
 
