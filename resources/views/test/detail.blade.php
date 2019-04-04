@@ -92,10 +92,12 @@
 
     test-card choice-section choice-item{
         display: block;
-        height: 4rem;
-        line-height: 4rem;
+        /* height: 4rem; */
+        line-height: 2rem;
         border-bottom:1px solid rgba(0, 0, 0, 0.15);
         transition: .2s ease-out .0s;
+        padding-top:1rem;
+        padding-bottom:1rem;
     }
 
     test-card choice-section choice-item:last-of-type{

@@ -115,7 +115,11 @@
         <h1 class="cm-title">{{$detail["exam_name"]}}</h1>
         <p><info-badge><i class="MDI clock"></i> {{$detail["exam_due"]}} 截止</info-badge> <info-badge><i class="MDI check-circle"></i> @if(is_null($detail["score"])) 尚未作答 @else 我的最高得分 {{$detail["score"]}}@endif</info-badge></p>
         <p class="mb-5">{{$detail["description"]}}</p>
+        @if(strtotime($detail["exam_due"])<time())
+        <button type="button" class="btn btn-raised btn-secondary" disabled>已截止</button>
+        @else
         <button type="button" class="btn btn-raised btn-primary" onclick="startTest()">开始测试</button>
+        @endif
         <button type="button" class="btn btn-raised btn-secondary">历史纪录</button>
     </div>
 </div>
@@ -123,10 +127,11 @@
     window.addEventListener("load",function() {
 
     }, false);
-
+    @if(strtotime($detail["exam_due"])>=time())
     function startTest(){
         location.href="{{route('exam_start', ['eid' => $detail['eid']])}}";
     }
+    @endif
 
 </script>
 @endsection

@@ -31,6 +31,9 @@ class ExamController extends Controller
         if(is_null($examDetail)){
             return Redirect::route('home');
         }
+        if(strtotime($examDetail["exam_due"])<time()){
+            return Redirect::route('home');
+        }
         $tid=$examModel->startTest($eid, Auth::user()->id);
         return Redirect::route('test_detail', [
             "tid"=>$tid
