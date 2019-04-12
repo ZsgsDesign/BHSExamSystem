@@ -23,8 +23,8 @@ class ExamController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('Users')
-            ->description('all users')
+            ->header('考试管理')
+            ->description('所有考试')
             ->body($this->grid());
     }
 
@@ -38,8 +38,8 @@ class ExamController extends Controller
     public function show($id, Content $content)
     {
         return $content
-            ->header('User Detail')
-            ->description('the detail of users')
+            ->header('详情')
+            ->description('考试详情')
             ->body($this->detail($id));
     }
 
@@ -53,8 +53,8 @@ class ExamController extends Controller
     public function edit($id, Content $content)
     {
         return $content
-            ->header('Edit User')
-            ->description('edit the detail of users')
+            ->header('编辑')
+            ->description('编辑详情')
             ->body($this->form()->edit($id));
     }
 
@@ -67,8 +67,8 @@ class ExamController extends Controller
     public function create(Content $content)
     {
         return $content
-            ->header('Create New User')
-            ->description('create a new user')
+            ->header('创建')
+            ->description('创建考试')
             ->body($this->form());
     }
 
@@ -79,21 +79,13 @@ class ExamController extends Controller
      */
     protected function grid()
     {
-        $exams=UserModel::exams();
-        $grid = new Grid(new UserModel);
-        $grid->id('UID')->sortable();
-        $grid->name("姓名")->editable();
-        $grid->email("学号");
-        foreach($exams as $e){
-            $grid->column($e["exam_name"])->display(function () use($e) {
-                return UserModel::findExam($this->id, $e["eid"]);
-            });
-        }
-        $grid->filter(function (Grid\Filter $filter) {
-            $filter->disableIdFilter();
-            $filter->like('name');
-            $filter->like('email');
-        });
+        $exams=ExamModel::exams();
+        $grid = new Grid(new ExamModel);
+        $grid->eid('EID')->sortable();
+        $grid->exam_name("考试名称")->editable();
+        $grid->exam_due("截止日期")->editable();
+        $grid->exam_line("及格线")->editable();
+        $grid->available("考试开启")->editable();
         return $grid;
     }
 
@@ -105,7 +97,7 @@ class ExamController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(UserModel::findOrFail($id));
+        $show = new Show(ExamModel::findOrFail($id));
         return $show;
     }
 
@@ -116,23 +108,13 @@ class ExamController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new UserModel);
-        $form->model()->makeVisible('password');
+        $form = new Form(new ExamModel);
         $form->tab('Basic', function (Form $form) {
-            $form->display('id');
-            $form->text('name')->rules('required');
-            $form->text('email')->rules('required');
-            $form->display('created_at');
-            $form->display('updated_at');
-        })->tab('Password', function (Form $form) {
-            $form->password('password')->rules('confirmed');
-            $form->password('password_confirmation');
-        });
-        $form->ignore(['password_confirmation']);
-        $form->saving(function (Form $form) {
-            if ($form->password && $form->model()->password != $form->password) {
-                $form->password = bcrypt($form->password);
-            }
+            $form->display('eid');
+            $form->text('exam_name')->rules('required');
+            $form->date('exam_due')->rules('required');
+            $form->number('exam_line');
+            $form->number('available');
         });
         return $form;
     }

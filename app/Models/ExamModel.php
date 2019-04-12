@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 class ExamModel extends Model
 {
     protected $tableName='exam';
+    protected $table='exam';
+    protected $primaryKey = 'eid';
+    const DELETED_AT=null;
+    const UPDATED_AT=null;
+    const CREATED_AT=null;
 
     public function list($uid)
     {
