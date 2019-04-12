@@ -79,7 +79,6 @@ class ExamController extends Controller
      */
     protected function grid()
     {
-        $exams=ExamModel::exams();
         $grid = new Grid(new ExamModel);
         $grid->eid('EID')->sortable();
         $grid->exam_name("考试名称")->editable();
