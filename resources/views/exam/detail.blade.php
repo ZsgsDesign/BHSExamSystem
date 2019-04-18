@@ -134,38 +134,62 @@
     @endif
 
     function history(){
-        alert(`
-        <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">时间</th>
-      <th scope="col">得分</th>
-      <th scope="col">操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">8</th>
-      <td>2019-04-04 15:05:25</td>
-      <td>10</td>
-      <td><a href="/test/8">详情</a></td>
-    </tr>
-    <tr>
-      <th scope="row">9</th>
-      <td>2019-04-04 14:49:36</td>
-      <td>4</td>
-      <td><a href="/test/9">详情</a></td>
-    </tr>
-    <tr>
-      <th scope="row">10</th>
-      <td>2019-04-12 11:32:37</td>
-      <td>2</td>
-      <td><a href="/test/10">详情</a></td>
-    </tr>
-  </tbody>
-</table>
-        `,"历史");
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/exam/getHistory',
+            data: {
+                eid: {{$detail["eid"]}}
+            },
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }, success: function(ret){
+                console.log(ret);
+                if(ret.ret==200){
+                    console.log(ret);
+                    var logs=`
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">时间</th>
+                                <th scope="col">得分</th>
+                                <th scope="col">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+                    ret.data.forEach(function(ele){
+                        logs+=`
+                            <tr>
+                                <th scope="row">${ele.tid}</th>
+                                <td>${ele.time}</td>
+                                <td>${ele.score}</td>
+                                <td><a href="/test/${ele.tid}">详情</a></td>
+                            </tr>
+                        `;
+                    });
+
+                    logs+=`
+                            </tbody>
+                        </table>
+                    `;
+
+                    alert(logs,"历史");
+                } else {
+                    alert(ret.desc);
+                }
+            }, error: function(xhr, type){
+                console.log(xhr);
+                switch(xhr.status) {
+                    case 422:
+                        alert(xhr.responseJSON.errors[Object.keys(xhr.responseJSON.errors)[0]][0], xhr.responseJSON.message);
+                        break;
+                    default:
+                        alert("服务器连接错误");
+                }
+            }
+        });
     }
 
 </script>
