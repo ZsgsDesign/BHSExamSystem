@@ -120,7 +120,7 @@
         @else
         <button type="button" class="btn btn-raised btn-primary" onclick="startTest()">开始测试</button>
         @endif
-        <button type="button" class="btn btn-raised btn-secondary">历史纪录</button>
+        <button type="button" class="btn btn-raised btn-secondary" onclick="history()">历史纪录</button>
     </div>
 </div>
 <script>
@@ -132,6 +132,41 @@
         location.href="{{route('exam_start', ['eid' => $detail['eid']])}}";
     }
     @endif
+
+    function history(){
+        alert(`
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">时间</th>
+      <th scope="col">得分</th>
+      <th scope="col">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">8</th>
+      <td>2019-04-04 15:05:25</td>
+      <td>10</td>
+      <td><a href="/test/8">详情</a></td>
+    </tr>
+    <tr>
+      <th scope="row">9</th>
+      <td>2019-04-04 14:49:36</td>
+      <td>4</td>
+      <td><a href="/test/9">详情</a></td>
+    </tr>
+    <tr>
+      <th scope="row">10</th>
+      <td>2019-04-12 11:32:37</td>
+      <td>2</td>
+      <td><a href="/test/10">详情</a></td>
+    </tr>
+  </tbody>
+</table>
+        `,"历史");
+    }
 
 </script>
 @endsection

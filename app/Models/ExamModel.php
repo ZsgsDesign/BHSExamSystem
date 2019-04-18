@@ -23,6 +23,11 @@ class ExamModel extends Model
         return $list;
     }
 
+    public function getHistory($eid,$uid)
+    {
+        return DB::table("test")->where(["eid"=>$eid,"uid"=>$uid])->where("due_time","<",date("Y-m-d H:i:s"))->orderBy('due_time', 'desc')->select("tid","due_time as time","score")->get()->all();
+    }
+
     public function detail($eid, $uid)
     {
         $basic=DB::table($this->tableName)->where(["available"=>1,"eid"=>$eid])->first();

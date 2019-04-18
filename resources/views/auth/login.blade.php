@@ -98,7 +98,7 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="email" class="bmd-label-floating">邮箱</label>
+                                    <label for="email" class="bmd-label-floating">学号</label>
                                     <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" id="email" required>
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
