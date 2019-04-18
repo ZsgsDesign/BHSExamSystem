@@ -13,5 +13,6 @@ Route::group([
     $router->get('/', 'HomeController@index');
     $router->resource('users', UserController::class);
     $router->resource('exams', ExamController::class);
+    $router->resource('problems', ProblemController::class);
 
 });

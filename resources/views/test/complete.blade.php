@@ -120,7 +120,7 @@
     }
 
     test-card:hover {
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 30px;
+        /* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 30px; */
         display: block;
     }
 
@@ -155,12 +155,12 @@
     }
 
     .mundb-standard-container {
-        flex-shrink: 0;
-        flex-grow: 1;
+        /* flex-shrink: 0;
+        flex-grow: 1; */
         padding-top: 0;
-        align-items: center;
+        /* align-items: center;
         display: flex;
-        justify-content: center;
+        justify-content: center; */
     }
 
 </style>
@@ -177,6 +177,30 @@
         @endif
         <a href="/"><button type="button" class="btn btn-raised btn-secondary">返回首页</button></a>
     </div>
+    <test-card>
+            <div>
+                <p>1. gdghdrhgrtdhtrf</p>
+                <choice-section>
+
+                    <choice-item>dhgeshreherherhre</choice-item>
+                    <choice-item>dhgeshreherherhre</choice-item>
+                    <choice-item>dhgeshreherherhre</choice-item>
+                    <choice-item>dhgeshreherherhre</choice-item>
+
+                </choice-section>
+            </div>
+            <div>
+                <p>1. gdghdrhgrtdhtrf</p>
+                <choice-section>
+
+                    <choice-item>dhgeshreherherhre</choice-item>
+                    <choice-item>dhgeshreherherhre</choice-item>
+                    <choice-item>dhgeshreherherhre</choice-item>
+                    <choice-item>dhgeshreherherhre</choice-item>
+
+                </choice-section>
+            </div>
+    </test-card>
 </div>
 <script>
 
