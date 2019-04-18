@@ -11,8 +11,10 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
-    $router->resource('users', UserController::class);
     $router->resource('exams', ExamController::class);
     $router->resource('problems', ProblemController::class);
+    $router->get('users/upload', 'UserController@upload');
+    $router->post('users/upload', 'UserController@upload');
+        $router->resource('users', UserController::class);
 
 });
