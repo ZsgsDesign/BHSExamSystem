@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Admin\Extensions\Tools\UploadUserButton;
 use Illuminate\Http\Request;
 use Encore\Admin\Facades\Admin;
+use App\Admin\Extensions\Tools\UserExpoter;
 
 class UserController extends Controller
 {
@@ -88,6 +89,7 @@ class UserController extends Controller
         $grid->tools(function ($tools) {
             $tools->append(new UploadUserButton());
         });
+        $grid->exporter(new UserExpoter());
         $grid->id('UID')->sortable();
         $grid->name("姓名")->editable();
         $grid->email("学号");
