@@ -30,6 +30,9 @@ Route::group(['prefix' => 'ajax', 'namespace' => 'Ajax'], function () {
     Route::group(['prefix' => 'test'], function () {
         Route::post('submitAns', 'TestController@submitAns');
     });
+    Route::group(['prefix' => 'exam'], function () {
+        Route::post('getHistory', 'ExamController@getHistory');
+    });
 });
 
 Auth::routes();
