@@ -30,7 +30,8 @@ class TestController extends Controller
             'site_title'=>"贝尔英才学院诚信考试系统",
             'navigation' => "Home",
             "testInfo"=>$testInfo,
-            "examInfo"=>$examInfo
+            "examInfo"=>$examInfo,
+            "testResult"=>$testProb
         ]):view('test.detail', [
             'page_title'=>"测试",
             'site_title'=>"贝尔英才学院诚信考试系统",

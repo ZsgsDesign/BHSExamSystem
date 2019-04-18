@@ -20,12 +20,21 @@
         box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 40px;
     }
 
-    h1{
+    .cm-title{
         margin-bottom:2rem;
         color: #3E4551;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    h1 small{
+    .cm-title h1:last-of-type{
+        flex-shrink: 0;
+        flex-grow: 0;
+        padding-left: 1rem;
+    }
+
+    .cm-title small{
         color: rgba(0, 0, 0, 0.54);
         font-size: 50%;
     }
@@ -83,10 +92,12 @@
 
     test-card choice-section choice-item{
         display: block;
-        height: 4rem;
-        line-height: 4rem;
+        /* height: 4rem; */
+        line-height: 2rem;
         border-bottom:1px solid rgba(0, 0, 0, 0.15);
         transition: .2s ease-out .0s;
+        padding-top:1rem;
+        padding-bottom:1rem;
     }
 
     test-card choice-section choice-item:last-of-type{
@@ -113,9 +124,15 @@
         transition: .2s ease-out .0s;
     }
 
-    test-card choice-section choice-item.bhs-selected::before{
+    test-card choice-section choice-item.bhs-wrong::before{
         border: 1px solid #f44336;
         background: #f44336;
+        color: rgba(255, 255, 255, 1);
+    }
+
+    test-card choice-section choice-item.bhs-correct::before{
+        border: 1px solid #4caf50 ;
+        background: #4caf50 ;
         color: rgba(255, 255, 255, 1);
     }
 
@@ -123,6 +140,7 @@
         /* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 30px; */
         display: block;
     }
+
 
     .cm-avatar{
         width:2.5rem;
@@ -154,13 +172,12 @@
         pointer-events: auto!important;
     }
 
-    .mundb-standard-container {
-        /* flex-shrink: 0;
-        flex-grow: 1; */
-        padding-top: 0;
-        /* align-items: center;
-        display: flex;
-        justify-content: center; */
+    test-card > div:first-of-type{
+        margin-top:0!important;
+    }
+
+    test-card > div:last-of-type{
+        margin-bottom:0!important;
     }
 
 </style>
@@ -178,28 +195,16 @@
         <a href="/"><button type="button" class="btn btn-raised btn-secondary">返回首页</button></a>
     </div>
     <test-card>
-            <div>
-                <p>1. gdghdrhgrtdhtrf</p>
+            @foreach($testResult as $t)
+            <div class="mt-5 mb-5">
+                <p>{{$t["pcode"]}}. {{$t["desc"]}}</p>
                 <choice-section>
-
-                    <choice-item>dhgeshreherherhre</choice-item>
-                    <choice-item>dhgeshreherherhre</choice-item>
-                    <choice-item>dhgeshreherherhre</choice-item>
-                    <choice-item>dhgeshreherherhre</choice-item>
-
+                    @foreach ($t["choices"] as $c)
+                        <choice-item data-acode="{{chr(65+$loop->index)}}" class="@if(md5($c["content"])==$t["cur_ans"]) bhs-wrong @endif @if(md5($c["content"])==$t["correctAns"]) bhs-correct @endif">{{$c["content"]}}</choice-item>
+                    @endforeach
                 </choice-section>
             </div>
-            <div>
-                <p>1. gdghdrhgrtdhtrf</p>
-                <choice-section>
-
-                    <choice-item>dhgeshreherherhre</choice-item>
-                    <choice-item>dhgeshreherherhre</choice-item>
-                    <choice-item>dhgeshreherherhre</choice-item>
-                    <choice-item>dhgeshreherherhre</choice-item>
-
-                </choice-section>
-            </div>
+            @endforeach
     </test-card>
 </div>
 <script>

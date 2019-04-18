@@ -11,7 +11,7 @@ class TestModel extends Model
 
     public function getProb($tid)
     {
-        $list=DB::table("test_problem")->where(["tid"=>$tid])->join("problem","problem.pid","=","test_problem.pid")->orderBy('pcode', 'asc')->select("test_problem.pid as pid","pcode","desc","choiceA","choiceB","choiceC","choiceD")->get()->all();
+        $list=DB::table("test_problem")->where(["tid"=>$tid])->join("problem","problem.pid","=","test_problem.pid")->orderBy('pcode', 'asc')->select("test_problem.pid as pid","pcode","desc","choiceA","choiceB","choiceC","choiceD","cur_ans","correctAns")->get()->all();
         foreach($list as &$l){
             $l["choices"]=[];
             if(!is_null($l["choiceA"])){
