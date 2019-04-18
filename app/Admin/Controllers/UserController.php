@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Admin\Extensions\Tools\UploadUserButton;
 use Illuminate\Http\Request;
 use Encore\Admin\Facades\Admin;
-use App\Admin\Extensions\Tools\UserExprter;
+use App\Admin\Extensions\Tools\UserExporter;
 
 class UserController extends Controller
 {
