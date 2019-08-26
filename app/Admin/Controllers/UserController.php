@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Admin\Extensions\Tools\UploadUserButton;
 use Illuminate\Http\Request;
 use Encore\Admin\Facades\Admin;
+use Illuminate\Support\MessageBag;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 // use App\Admin\Extensions\Tools\UserExporter;
 
 class UserController extends Controller
@@ -154,16 +156,15 @@ class UserController extends Controller
             $name = time().'.xls';
             $path = $request->file('upfile')->storeAs('public',$name);
             $url = storage_path().'/app/'.$path;
-            $file = \PHPExcel_IOFactory::load($url);
+            $file = IOFactory::load($url);
             $re = $file->getSheet(0)->toArray(null,false,false,true);
-            $re[0] = '';
-            $header = ["email"];
-            $recounts = count($re);
-            for ($i=2;$i<$recounts;$i++){
-                DB::table('user')->insert([
-                    "email"=>$re[1],
-                    "name"=>$re[1],
-                    "password"=>Hash::make($re[1]),
+            foreach ($re as $r){
+                UserModel::firstOrCreate([
+                    "email"=>$r["A"]
+                ],[
+                    "email"=>$r["A"],
+                    "name"=>$r["A"],
+                    "password"=>Hash::make($r["A"]),
                     'email_verified_at' => date("Y-m-d H:i:s"),
                     'avatar' => "/static/img/avatar/default.png"
                 ]);
