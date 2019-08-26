@@ -40,8 +40,8 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         return view("auth.login", [
-            'page_title'=>"Login",
-            'site_title'=>"NOJ",
+            'page_title'=>"登录",
+            'site_title'=>"贝尔英才学院诚信考试系统",
             'navigation' => "Account"
         ]);
     }
