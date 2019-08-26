@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Admin\Extensions\Tools\UploadUserButton;
 use Illuminate\Http\Request;
 use Encore\Admin\Facades\Admin;
-use App\Admin\Extensions\Tools\UserExporter;
+// use App\Admin\Extensions\Tools\UserExporter;
 
 class UserController extends Controller
 {
@@ -89,7 +89,7 @@ class UserController extends Controller
         $grid->tools(function ($tools) {
             $tools->append(new UploadUserButton());
         });
-        $grid->exporter(new UserExporter());
+        // $grid->exporter(new UserExporter());
         $grid->id('UID')->sortable();
         $grid->name("姓名")->editable();
         $grid->email("学号");
@@ -184,5 +184,20 @@ class UserController extends Controller
                 $content->body(view('tools.UserUpload'));
             });
         }
+    }
+
+    public function export()
+    {
+        $userModel=new UserModel();
+        $downloadFile=$userModel->export();
+
+        return response()->streamDownload(function() use ($downloadFile){
+            foreach($downloadFile as $down){
+                foreach($down as $d){
+                    echo "$d,";
+                }
+                echo "\n";
+            }
+        },"record.csv");
     }
 }

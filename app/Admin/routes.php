@@ -15,6 +15,7 @@ Route::group([
     $router->resource('problems', ProblemController::class);
     $router->get('users/upload', 'UserController@upload');
     $router->post('users/upload', 'UserController@upload');
-        $router->resource('users', UserController::class);
+    $router->get('users/export', 'UserController@export');
+    $router->resource('users', UserController::class);
 
 });

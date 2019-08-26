@@ -34,4 +34,14 @@ class UserModel extends Model
     public static function exams(){
         return DB::table("exam")->where(["available"=>1])->get()->all();
     }
+    public function export()
+    {
+        $userList=DB::table("users")->select("name","email as SID")->get()->all();
+        $exams=UserModel::exams();
+        foreach ($userList as &$u) {
+            foreach ($exams as $e) {
+                $u[]=UserModel::findExam($this->id, $e["eid"])["score"];
+            }
+        }
+    }
 }
