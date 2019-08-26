@@ -34,14 +34,23 @@ class UserModel extends Model
     public static function exams(){
         return DB::table("exam")->where(["available"=>1])->get()->all();
     }
-    public function export()
+
+    public static function export()
     {
-        $userList=DB::table("users")->select("name","email as SID")->get()->all();
+        $userList=DB::table("users")->select("id","name","email as SID")->get()->all();
+        $ret=['学号', '姓名'];
         $exams=UserModel::exams();
-        foreach ($userList as &$u) {
-            foreach ($exams as $e) {
-                $u[]=UserModel::findExam($this->id, $e["eid"])["score"];
-            }
+        foreach ($exams as $e) {
+            $ret[]=$e["exam_name"];
         }
+        $ret=[$ret];
+        foreach ($userList as $u) {
+            $rowContent=[$u["SID"],$u["name"]];
+            foreach ($exams as $e) {
+                $rowContent[]=UserModel::findExam($u['id'], $e["eid"]);
+            }
+            $ret[]=$rowContent;
+        }
+        return $ret;
     }
 }

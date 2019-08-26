@@ -163,7 +163,7 @@ class UserController extends Controller
                     "email"=>$r["A"]
                 ],[
                     "email"=>$r["A"],
-                    "name"=>$r["A"],
+                    "name"=>$r["B"],
                     "password"=>Hash::make($r["A"]),
                     'email_verified_at' => date("Y-m-d H:i:s"),
                     'avatar' => "/static/img/avatar/default.png"

@@ -25,7 +25,9 @@ class ExamModel extends Model
 
     public function getHistory($eid,$uid)
     {
-        return DB::table("test")->where(["eid"=>$eid,"uid"=>$uid])->where("due_time","<",date("Y-m-d H:i:s"))->orderBy('due_time', 'desc')->select("tid","due_time as time","score")->limit(10)->get()->all();
+        return DB::table("test")->where(["eid"=>$eid,"uid"=>$uid])->where(function ($query) {
+            $query->where("due_time","<",date("Y-m-d H:i:s"))->orWhere('score', '<>', -1);
+        })->orderBy('due_time', 'desc')->select("tid","due_time as time","score")->limit(10)->get()->all();
     }
 
     public function detail($eid, $uid)
