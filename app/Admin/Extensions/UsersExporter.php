@@ -18,6 +18,20 @@ class UsersExporter extends AbstractExporter
         $spreadsheet->getDefaultStyle()->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->fromArray($database, NULL, 'A1' );
+        $styleArray = [
+            'borders' => [
+                  'allBorders' => [
+                    'borderStyle' => 'thin'
+                ]
+            ]
+        ];
+        if(count($database[0])>26) $column='Z';
+        else $column=chr(64+count($database[0]));
+        $row=count($database);
+        $sheet->getStyle("A1:$column$row")->applyFromArray($styleArray);
+        foreach(range('A',$column) as $col){
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+        }
         $writer = new Xlsx($spreadsheet);
 
         $filename = 'score.xlsx';
