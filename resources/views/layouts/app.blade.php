@@ -139,7 +139,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:sticky;top:0;z-index:999;flex-shrink: 0;flex-grow: 0;">
             <a class="navbar-brand" href="/">
-                <img src="/static/img/njupt.png" height="30"> 贝尔英才学院诚信考试系统
+                <img src="/static/img/logo-center.png" height="30">
             </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -148,7 +148,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link @if ($navigation === "Home") active @endif" href="/">考试系统</a>
+                    <a class="nav-link @if ($navigation === "Home") active @endif" href="/">诚信考试系统</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://bhs.njupt.edu.cn">贝尔英才学院主页</a>
