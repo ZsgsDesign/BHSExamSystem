@@ -26,12 +26,20 @@ Route::group(['prefix' => 'test'], function () {
     Route::get('/{tid}', 'TestController@detail')->middleware('auth')->name('test_detail');
 });
 
+Route::group(['prefix' => 'account'], function () {
+    Route::redirect('/', '/', 301);
+    Route::get('/settings', 'AccountController@settings')->middleware('auth')->name('account_settings');
+});
+
 Route::group(['prefix' => 'ajax', 'namespace' => 'Ajax'], function () {
     Route::group(['prefix' => 'test'], function () {
         Route::post('submitAns', 'TestController@submitAns');
     });
     Route::group(['prefix' => 'exam'], function () {
         Route::post('getHistory', 'ExamController@getHistory');
+    });
+    Route::group(['prefix' => 'account'], function () {
+        Route::post('change_password', 'AccountController@changePassword')->middleware('auth')->name('account_change_password');
     });
 });
 

@@ -165,11 +165,13 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-header"><img src="{{ Auth::user()->avatar }}" class="mundb-avatar" id="atsast_nav_avatar" /><div><h6>{{ Auth::user()["name"] }}<br/><small>{{ Auth::user()->email }}</small></h6></div></div>
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/account/settings"><i class="MDI key-variant"></i> 修改密码</a>
+                                <div class="dropdown-divider"></div>
                                 <a  class="dropdown-item text-danger"
                                     href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
-                                    <i class="MDI exit-to-app text-danger"></i> {{ __('Logout') }}
+                                    <i class="MDI exit-to-app text-danger"></i> 退出
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
