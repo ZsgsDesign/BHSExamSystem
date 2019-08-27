@@ -14,6 +14,7 @@
 Route::redirect('/home', '/', 301);
 
 Route::get('/', 'MainController@home')->middleware('auth')->name('home');
+Route::redirect('/register', '/login', 301);
 
 Route::group(['prefix' => 'exam'], function () {
     Route::redirect('/', '/', 301);
@@ -43,4 +44,6 @@ Route::group(['prefix' => 'ajax', 'namespace' => 'Ajax'], function () {
     });
 });
 
-Auth::routes();
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
