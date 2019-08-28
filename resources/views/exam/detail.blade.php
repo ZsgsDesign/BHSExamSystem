@@ -3,6 +3,11 @@
 @section('template')
 
 <style>
+
+    .mundb-background-container > img{
+        opacity: 0.125;
+    }
+
     paper-card {
         display: block;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 30px;

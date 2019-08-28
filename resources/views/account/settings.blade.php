@@ -9,7 +9,7 @@
         border-radius: 4px;
         transition: .2s ease-out .0s;
         color: #7a8e97;
-        background: #fff;
+        background: rgba(255, 255, 255, 0.9);
         padding: 1rem;
         position: relative;
         border: 1px solid rgba(0, 0, 0, 0.15);

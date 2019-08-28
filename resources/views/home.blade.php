@@ -38,7 +38,7 @@
     exam-card{
         display: block;
         padding: 1rem;
-        background: #fff;
+        background: rgba(255, 255, 255, 0.9);
         border: 1px solid rgba(0, 0, 0, 0.15);
         border-radius: 4px;
         margin-bottom: 2rem;

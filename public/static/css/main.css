@@ -318,8 +318,8 @@ body{
     font-family: fzcysj;
 }
 
-.bg-dark{
-    background-color: #3E4551!important;
+.bg-dark {
+    background-color: rgba(62, 69, 81, 0.9)!important;
 }
 
 @media only screen and (max-width: 992px){
