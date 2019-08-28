@@ -135,7 +135,7 @@
     <link rel="stylesheet" href="/static/fonts/Devicon/devicon.css">
     <!-- Background -->
     <div class="mundb-background-container">
-        <img src="">
+        <img src="https://sast.njupt.edu.cn/static/img/njupt.jpg">
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:sticky;top:0;z-index:999;flex-shrink: 0;flex-grow: 0;">
             <a class="navbar-brand" href="/">
