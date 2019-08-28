@@ -62,6 +62,7 @@
 
     .card-footer {
         border: none;
+        background: rgba(255, 255, 255, 0.8);
     }
 
     .checkbox {
