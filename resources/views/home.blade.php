@@ -100,9 +100,24 @@
 </style>
 
 <div class="container mundb-standard-container">
-    <h1 class="cm-title">我的考试</h1>
+    <h1 class="cm-title">我的考试及学习资料</h1>
     <div class="row">
+
         @foreach ($exams as $e)
+
+            @if($e['file'])
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <exam-card onclick="location.href='{{$e["file_url"]}}'">
+                        <h5><i class="MDI file-pdf"></i> {{$e["exam_name"]}}</h5>
+                        <score-section>
+                            <div>
+                                <span>资料下载</span>
+                            </div>
+                        </score-section>
+                        <p><i class="MDI download"></i> {{$e["file_name"]}}</p>
+                    </exam-card>
+                </div>
+            @endif
 
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                 <exam-card onclick="location.href='/exam/{{$e["eid"]}}'">
