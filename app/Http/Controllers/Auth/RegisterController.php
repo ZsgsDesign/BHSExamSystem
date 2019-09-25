@@ -76,7 +76,7 @@ class RegisterController extends Controller
     {
         return view("auth.register", [
             'page_title'=>"注册",
-            'site_title'=>"贝尔英才学院诚信考试系统",
+            'site_title'=>"贝尔英才学院诚信教育系统",
             'navigation' => "Account"
         ]);
     }

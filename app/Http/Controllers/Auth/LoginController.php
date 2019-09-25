@@ -41,7 +41,7 @@ class LoginController extends Controller
     {
         return view("auth.login", [
             'page_title'=>"登录",
-            'site_title'=>"贝尔英才学院诚信考试系统",
+            'site_title'=>"贝尔英才学院诚信教育系统",
             'navigation' => "Account"
         ]);
     }

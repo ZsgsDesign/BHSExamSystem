@@ -18,7 +18,7 @@ class ExamController extends Controller
         }
         return view('exam.detail', [
                 'page_title'=>"详情",
-                'site_title'=>"贝尔英才学院诚信考试系统",
+                'site_title'=>"贝尔英才学院诚信教育系统",
                 'navigation' => "Home",
                 'detail'=>$examDetail
             ]);

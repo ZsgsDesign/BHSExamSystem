@@ -15,7 +15,7 @@ class MainController extends Controller
         $examList=$examModel->list(Auth::user()->id);
         return view('home', [
                 'page_title'=>"首页",
-                'site_title'=>"贝尔英才学院诚信考试系统",
+                'site_title'=>"贝尔英才学院诚信教育系统",
                 'navigation' => "Home",
                 'exams'=> $examList
             ]);

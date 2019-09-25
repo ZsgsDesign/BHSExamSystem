@@ -120,7 +120,7 @@
                 <div></div>
                 <div></div>
             </div>
-            <p>考试系统准备中……</p>
+            <p>教育系统准备中……</p>
         </div>
     </loading>
     <!-- Style -->
@@ -147,9 +147,9 @@
     </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link @if ($navigation === "Home") active @endif" href="/">诚信考试系统</a>
-                </li>
+                {{-- <li class="nav-item">
+                    <a class="nav-link @if ($navigation === "Home") active @endif" href="/">诚信教育系统</a>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link" href="http://bhs.njupt.edu.cn">贝尔英才学院主页</a>
                 </li>

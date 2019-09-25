@@ -100,28 +100,62 @@
 </style>
 
 <div class="container mundb-standard-container">
-    <h1 class="cm-title">我的考试及学习资料</h1>
+    <h1 class="cm-title">贝尔英才学院诚信教育系统</h1>
     <div class="row">
 
         @foreach ($exams as $e)
 
-            @if($e['file'])
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <exam-card onclick="location.href='{{$e["file_url"]}}'">
-                        <h5><i class="MDI file-pdf"></i> {{$e["exam_name"]}}</h5>
-                        <score-section>
-                            <div>
-                                <span>资料下载</span>
-                            </div>
-                        </score-section>
-                        <p><i class="MDI download"></i> {{$e["file_name"]}}</p>
-                    </exam-card>
-                </div>
-            @endif
+            {{-- 这里写死了，因为今天上线 --}}
+
+            {{-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <exam-card onclick="learn()">
+                    <h5><i class="MDI file-document"></i> 诚信学习</h5>
+                    <score-section>
+                        <div>
+                            <span>学习资料</span>
+                        </div>
+                    </score-section>
+                    <p><i class="MDI file-multiple"></i> 3个文件</p>
+                </exam-card>
+            </div> --}}
+
+            <div class="col-12">
+                <exam-card style="cursor:auto;">
+                    <h5><i class="MDI apps"></i> 学习资料列表</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">文件名</th>
+                            <th scope="col" style="white-space: nowrap;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>国家教育部诚信教育宣传片</td>
+                                <td  style="white-space: nowrap;"><a href="https://v.qq.com/x/page/i01794dld5q.html">观看</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>教育部高等学校预防与处理学术不端行为办法</td>
+                                <td  style="white-space: nowrap;"><a href="/static/learn/moerules.pdf">下载</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>贝尔英才学院学生学术诚信管理规范（试行）</td>
+                                <td  style="white-space: nowrap;"><a href="/static/learn/bhsrules.pdf">下载</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </exam-card>
+            </div>
+
+
 
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                 <exam-card onclick="location.href='/exam/{{$e["eid"]}}'">
-                    <h5><i class="MDI school"></i> {{$e["exam_name"]}}</h5>
+                    <h5><i class="MDI school"></i> 诚信考试</h5>
                     <score-section>
                         <div>
                             @if(is_null($e["score"]))
@@ -135,6 +169,20 @@
                     <p><i class="MDI clock"></i> {{$e["exam_due"]}} 截止</p>
                 </exam-card>
             </div>
+
+            @if($e['file'])
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <exam-card onclick="location.href='{{$e["file_url"]}}'">
+                        <h5><i class="MDI file-pdf"></i> 诚信考试答案</h5>
+                        <score-section>
+                            <div>
+                                <span>答案下载</span>
+                            </div>
+                        </score-section>
+                        <p><i class="MDI download"></i> 答案.pdf</p>
+                    </exam-card>
+                </div>
+            @endif
 
         @endforeach
 {{--
@@ -167,6 +215,10 @@
     window.addEventListener("load",function() {
 
     }, false);
+
+    function learn(){
+
+    }
 
 </script>
 @endsection

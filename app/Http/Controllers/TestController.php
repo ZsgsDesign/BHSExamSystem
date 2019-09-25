@@ -27,14 +27,14 @@ class TestController extends Controller
         $testProb=$testModel->getProb($tid);
         return $testInfo["status"]?view('test.complete', [
             'page_title'=>"测试结果",
-            'site_title'=>"贝尔英才学院诚信考试系统",
+            'site_title'=>"贝尔英才学院诚信教育系统",
             'navigation' => "Home",
             "testInfo"=>$testInfo,
             "examInfo"=>$examInfo,
             "testResult"=>$testProb
         ]):view('test.detail', [
             'page_title'=>"测试",
-            'site_title'=>"贝尔英才学院诚信考试系统",
+            'site_title'=>"贝尔英才学院诚信教育系统",
             'navigation' => "Home",
             "testProb"=>$testProb,
             "testInfo"=>$testInfo,
