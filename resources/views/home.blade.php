@@ -139,12 +139,12 @@
                             <tr>
                                 <th scope="row">2</th>
                                 <td>教育部高等学校预防与处理学术不端行为办法</td>
-                                <td  style="white-space: nowrap;"><a href="/static/learn/moerules.pdf">下载</a></td>
+                                <td  style="white-space: nowrap;"><a href="/static/pdf/learn/moerules.pdf">下载</a></td>
                             </tr>
                             <tr>
                                 <th scope="row">3</th>
                                 <td>贝尔英才学院学生学术诚信管理规范（试行）</td>
-                                <td  style="white-space: nowrap;"><a href="/static/learn/bhsrules.pdf">下载</a></td>
+                                <td  style="white-space: nowrap;"><a href="/static/pdf/learn/bhsrules.pdf">下载</a></td>
                             </tr>
                         </tbody>
                     </table>
